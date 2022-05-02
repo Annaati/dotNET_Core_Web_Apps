@@ -23,8 +23,18 @@ namespace EmployeeManagement.Models
 
         public Employee Add(Employee employee)
         {
-            employee.Id = _employeeList.Max(e =>e.Id) + 1;
+            employee.Id = _employeeList.Max(e => e.Id) + 1;
             _employeeList.Add(employee);
+            return employee;
+        }
+
+        public Employee Delete(int Id)
+        {
+            Employee employee = _employeeList.FirstOrDefault(e => e.Id == Id);
+            if (employee != null)
+            {
+                _employeeList.Remove(employee);
+            }
             return employee;
         }
 
@@ -36,6 +46,18 @@ namespace EmployeeManagement.Models
         public Employee GetEmployee(int Id)
         {
             return _employeeList.FirstOrDefault(e => e.Id == Id);
+        }
+
+        public Employee Update(Employee updateEmployee)
+        {
+            Employee employee = _employeeList.FirstOrDefault(e => e.Id == updateEmployee.Id);
+            if (employee != null)
+            {
+                    employee.Name = updateEmployee.Name;
+                    employee.Email = updateEmployee.Email;
+                    employee.Dep = updateEmployee.Dep;
+            }
+            return employee;
         }
     }
 }
