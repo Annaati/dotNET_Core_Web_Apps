@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Employee Details";
+    var PhotoPath = "~/assets/images/employees/" + (Model.Employee.PhotoPath ?? "img_placeholder.png");
 }
 
 <h3>@Model.PageTitle</h3>
@@ -13,7 +14,7 @@
                 <h2>@Model.Employee.Name</h2>
             </div>
             <div class="card-body text-center">
-                <center><img class="img card-img-top" src="~/assets/images/employees//male_avatar1.png" asp-append-version="true"/></center>
+                <center><img class="card-img-top imgProfile" src="@PhotoPath" asp-append-version="true"/></center>
                 <h4>Id : @Model.Employee.Id</h4>
                 <h4>Gender : @Model.Employee.Gender</h4>
                 <h4>Email : @Model.Employee.Email</h4>

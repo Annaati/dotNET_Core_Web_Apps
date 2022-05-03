@@ -1,11 +1,10 @@
-﻿@model Employee
-@inject IEmployeeRepository _epmRepo
+﻿@model EmployeeCreateViewModel
 
 @{
     ViewBag.Title = "Create Employee";
 }
 
-<form asp-controller="home" asp-action="create" method="post" class="m-3 p-2">
+<form enctype="multipart/form-data" asp-controller="home" asp-action="create" method="post" class="m-3 p-2">
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">@ViewBag.Title</h3>
@@ -40,8 +39,17 @@
                     </select>
                     <span asp-validation-for="Dep" class="text-danger"></span>
                 </div>
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
+                        <div class="custom-file">
+                            <input asp-for="Photo" class="form-control custom-file-input" />
+                            @*<label class="custom-file-labe">Choose File...</label>*@
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </div><br />
         <div class="card-footer">
             <div class="form-group row">
                 <div class="col-sm-10">
@@ -49,7 +57,16 @@
                 </div>
             </div>
         </div>
-        <br /><br />
-        <div class="form-control-plaintext text-center">Total Employee: @_epmRepo.GetAllEmployees().Count()</div>
     </div>
+
+    @section Scripts {
+        @*<script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+        </script>*@
+    }
 </form>
