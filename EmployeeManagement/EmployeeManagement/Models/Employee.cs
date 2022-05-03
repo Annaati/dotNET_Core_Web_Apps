@@ -19,5 +19,6 @@ namespace EmployeeManagement.Models
         public String Email { get; set; }
         [Required]
         public DeptsEnum? Dep { get; set; }
+        public String PhotoPath { get; set; }
     }
 }

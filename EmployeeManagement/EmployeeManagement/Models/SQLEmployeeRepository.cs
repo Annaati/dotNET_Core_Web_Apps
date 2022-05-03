@@ -29,7 +29,7 @@ namespace EmployeeManagement.Models
                 context.Employees.Remove(employee);
                 context.SaveChanges();
             }
-            return employee
+            return employee;
         }
 
         public IEnumerable<Employee> GetAllEmployees()
