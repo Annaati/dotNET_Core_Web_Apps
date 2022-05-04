@@ -1,0 +1,80 @@
+﻿@model EmployeeEditViewModel
+
+@{
+    ViewBag.Title = "Edit Employee";
+    var PhotoPath = "~/assets/images/employees/" + (Model.ExistingPhotPath ?? "img_placeholder.png");
+}
+
+<form enctype="multipart/form-data" asp-controller="home" asp-action="edit" method="post" class="m-3 p-2">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <input hidden asp-for="Id" />
+                <input hidden asp-for="ExistingPhotPath" />
+                <div class="form-group col-md-6">
+                    <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Gender" class="col-sm-2 col-form-label"></label>
+                    <select asp-for="Gender" class="form-control">
+                        <option value="">Select Gender...</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+                    <input asp-for="Email" class="form-control" placeholder="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Dep" class="col-sm-2 col-form-label"></label>
+                    <select asp-for="Dep" class="form-control" asp-items="Html.GetEnumSelectList<DeptsEnum>()">
+                        <option value="">Select Department...</option>
+                    </select>
+                    <span asp-validation-for="Dep" class="text-danger"></span>
+                </div>
+                <div class="form-group row col-md-8">
+                    <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
+                    <div class="custom-file">
+                        <input asp-for="Photo" class="form-control custom-file-input" />
+                        @*<label class="custom-file-labe">Choose File...</label>*@
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group row col-sm-4 offset-sm-4">
+                    <img src="@PhotoPath" class="imgProfile" asp-append-version="true" />
+                </div>
+            </div>
+        </div><br />
+        <div class="card-footer">
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                <div class="col-sm-2">
+                    <a asp-controller="home" asp-action="index" class="btn btn-primary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*@section Scripts {
+            <script>
+                $(document).ready(function () {
+                    $('.custom-file-input').html = "Click here to Change Profile Pic";
+                        $('.custom-file-input').on("change", function () {
+                            var fileName = $(this).val().split("\\").pop();
+                            $(this).next('.custom-file-label').html(fileName);
+                        });
+                    });
+                </script>
+        }*@
+</form>
