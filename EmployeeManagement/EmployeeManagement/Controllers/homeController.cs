@@ -28,11 +28,19 @@ namespace EmployeeManagement.controllers
             return View(model);
         }
 
-        public ViewResult Details(int Id)
+        public ViewResult Details(int? id)
         {
+            throw new Exception("Exception error Occured in Details");
+
+            Employee employee = _employeeRepository.GetEmployee(id.Value);
+            if(employee == null)
+            {
+                Response.StatusCode = 404;
+                return View("EmployeeNotFound", id.Value);
+            }
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Employee = _employeeRepository.GetEmployee(Id),
+                Employee = employee,
                 PageTitle = "Employee Details",
             };
 
