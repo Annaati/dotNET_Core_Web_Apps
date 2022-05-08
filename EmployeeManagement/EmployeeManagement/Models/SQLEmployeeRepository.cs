@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,10 +9,25 @@ namespace EmployeeManagement.Models
     public class SQLEmployeeRepository : IEmployeeRepository
     {
         private readonly systemdbContext context;
+        private readonly ILogger<SQLEmployeeRepository> logger;
 
-        public SQLEmployeeRepository(systemdbContext context)
+        public SQLEmployeeRepository(systemdbContext context, ILogger<SQLEmployeeRepository> logger)
         {
             this.context = context;
+            this.logger = logger;
+        }
+        
+
+        public Employee GetEmployee(int Id)
+        {
+            logger.LogTrace("Trace Log");
+            logger.LogDebug("Debug Log");
+            logger.LogInformation("Information Log");
+            logger.LogWarning("Warning Log");
+            logger.LogError("Error Log");
+            logger.LogCritical("Critical Log");
+
+            return context.Employees.Find(Id);
         }
 
         public Employee Add(Employee addEmployee)
@@ -35,11 +51,6 @@ namespace EmployeeManagement.Models
         public IEnumerable<Employee> GetAllEmployees()
         {
             return context.Employees;
-        }
-
-        public Employee GetEmployee(int Id)
-        {
-            return context.Employees.Find(Id);
         }
 
         public Employee Update(Employee updateEmployee)
