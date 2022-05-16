@@ -15,6 +15,7 @@ namespace EmployeeManagement.Models
         [Required]
         public String Gender { get; set; }
         [Required]
+        [EmailAddress]
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", ErrorMessage="Invalid Email format")]
         public String Email { get; set; }
         [Required]
