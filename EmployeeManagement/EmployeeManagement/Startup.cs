@@ -44,7 +44,7 @@ namespace EmployeeManagement
             }
             else
             {
-                app.UseExceptionHandler("/ExceptionHandler");
+                app.UseExceptionHandler("/Error");
                 app.UseStatusCodePagesWithReExecute("/Error/{0}");
             }
             //DefaultFilesOptions defaultFilesO ptions = new DefaultFilesOptions();

@@ -37,9 +37,9 @@ namespace EmployeeManagement.Controllers
             return View("NotFound");
         }
 
-        [Route("ExceptionHandler")]
+        [Route("Error")]
         [AllowAnonymous]
-        public IActionResult ExceptionHandler()
+        public IActionResult Error()
         {
             var ExceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
@@ -49,7 +49,7 @@ namespace EmployeeManagement.Controllers
             //ViewBag.ErrorMessage = ExceptionDetails.Error.Message;
             //ViewBag.StackTrace = ExceptionDetails.Error.StackTrace;
 
-            return View("ExceptionHandler");
+            return View("Error");
         }
 
 
