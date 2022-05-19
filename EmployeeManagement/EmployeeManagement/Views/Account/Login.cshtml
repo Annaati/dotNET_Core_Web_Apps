@@ -1,0 +1,36 @@
+﻿@model LoginViewModel
+
+@{
+    ViewBag.Title = "User Login";
+}
+
+<div class="card">
+    <form method="post">
+        <div class="card-header"><h2 class="card-title">User Login</h2></div>
+        <div class="card-body">
+            <div class="row">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group col-md-8">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" placeholder="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-8">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" placeholder="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-8">
+                    <div class="checkbox"></div>
+                    <label asp-for="RememberMe">
+                        <input asp-for="RememberMe"/>
+                        @Html.DisplayNameFor(m => m.RememberMe)
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </form>
+</div>
