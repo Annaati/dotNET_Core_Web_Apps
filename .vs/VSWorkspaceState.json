@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\EmployeeManagement",
+    "\\EmployeeManagement\\EmployeeManagement",
+    "\\EmployeeManagement\\EmployeeManagement\\Controllers",
+    "\\EmployeeManagement\\EmployeeManagement\\Views\\Shared"
+  ],
+  "SelectedNode": "\\EmployeeManagement\\EmployeeManagement\\Controllers\\AccountController.cs",
+  "PreviewInSolutionExplorer": false
+}
