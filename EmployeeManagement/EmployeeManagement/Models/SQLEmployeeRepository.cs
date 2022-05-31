@@ -20,12 +20,12 @@ namespace EmployeeManagement.Models
 
         public Employee GetEmployee(int Id)
         {
-            logger.LogTrace("Trace Log");
-            logger.LogDebug("Debug Log");
-            logger.LogInformation("Information Log");
-            logger.LogWarning("Warning Log");
-            logger.LogError("Error Log");
-            logger.LogCritical("Critical Log");
+            //logger.LogTrace("Trace Log");
+            //logger.LogDebug("Debug Log");
+            //logger.LogInformation("Information Log");
+            //logger.LogWarning("Warning Log");
+            //logger.LogError("Error Log");
+            //logger.LogCritical("Critical Log");
 
             return context.Employees.Find(Id);
         }
