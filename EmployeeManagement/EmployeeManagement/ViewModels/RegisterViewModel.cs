@@ -11,6 +11,12 @@ namespace EmployeeManagement.ViewModels
     public class RegisterViewModel
     {
         [Required]
+        public String FullName { get; set; }
+
+        [Required]
+        public String Gender { get; set; }
+
+        [Required]
         [EmailAddress]
         [Remote(action: "IsEmailInUse", controller: "Account")]
         [ValidEmailDomain(allowedDomain: "EMS.com", ErrorMessage = "Email Domain must be EMS.com")]
@@ -25,6 +31,9 @@ namespace EmployeeManagement.ViewModels
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "Password Confirmation doesn't match")]
         public String ConfirmPassword { get; set; }
+
+        [Required]
+        public String Address { get; set; }
 
     }
 }
