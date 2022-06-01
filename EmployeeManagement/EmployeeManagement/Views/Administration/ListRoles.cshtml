@@ -6,7 +6,7 @@
 
 <div class="card">
     <br /><br /><br />
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center pb-3">
         <a asp-action="CreateRole" asp-controller="Administration" class="btn btn-primary" style="width:auto">Create Role</a>
     </div>
     @if (Model.Any())
@@ -26,8 +26,8 @@
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-center">
-                    <a class="btn btn-primary" style="width:auto">Edit Role</a>&nbsp &nbsp &nbsp
-                    <a class="btn btn-primary" style="width:auto">Delete Role</a>
+                    <a class="btn btn-primary" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id" style="width:auto">Edit Role</a>&nbsp &nbsp &nbsp
+                    <a href="#" class="btn btn-primary" style="width:auto">Delete Role</a>
                 </div>
             </div>
         }
