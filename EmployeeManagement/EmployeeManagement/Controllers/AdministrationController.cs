@@ -112,6 +112,48 @@ namespace EmployeeManagement.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditUsersInRole(String roleId)
+        {
+            ViewBag.roleId = roleId;
+
+            var role = await roleManager.FindByIdAsync(roleId);
+
+            if(role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {roleId} could not be found";
+                return View("NotFound");
+            }
+
+            var model = new List<UserRoleViewModel>();
+
+            foreach(var user in userManager.Users)
+            {
+                var userRoleViewModel = new UserRoleViewModel
+                {
+                    UserId = user.Id,
+                    UserName = user.UserName
+                };
+                if(await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRoleViewModel.IsSelected = true;
+                }
+                else
+                {
+                    userRoleViewModel.IsSelected = false;
+                }
+                model.Add(userRoleViewModel);
+            };
+            return View();
+        }
+
+        //[HttpPost]
+        //public IActionResult EditUsersInRole()
+        //{
+
+        //    return View();
+        //}
+
 
     }
 }
