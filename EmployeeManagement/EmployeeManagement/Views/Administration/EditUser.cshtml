@@ -47,7 +47,19 @@
 
 <div class="card mt-4">
     <div class="card-header mt-2"><h2 class="card-title">User Roles</h2></div>
-    <div class="card-body">None at the Moment</div>
+    <div class="card-body">
+        @if(Model.Roles.Any())
+        {
+            foreach(var role in Model.Roles)
+            {
+                <h3 class="card-text">@role</h3>
+            }
+        }
+        else
+        {
+                <h2>None at the moment</h2>
+        }
+    </div>
     <div class="card-footer">
         <div class="d-flex justify-content-end mt-2">
             <a asp-controller="Administration" asp-action="ListRoles" class="btn btn-primary" style="width:auto;">Manage Roles</a>
