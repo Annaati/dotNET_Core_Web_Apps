@@ -66,9 +66,22 @@
         </div>
     </div>
 </div>
+
 <div class="card mt-4">
     <div class="card-header"><h2 class="card-title">User Claims</h2></div>
-    <div class="card-body">None at the Moment</div>
+    <div class="card-body">
+        @if (Model.Roles.Any())
+        {
+            foreach (var role in Model.Claims)
+            {
+                <h3 class="card-text">@role</h3>
+            }
+        }
+        else
+        {
+            <h2>None at the moment</h2>
+        }
+    </div>
     <div class="card-footer">
         <div class="d-flex justify-content-end mt-2">
             <a asp-controller="Administration" asp-action="UserClaims" class="btn btn-primary" style="width:auto;">Manage Claims</a>
