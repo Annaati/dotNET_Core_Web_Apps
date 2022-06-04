@@ -42,9 +42,23 @@ namespace EmployeeManagement.Controllers
                 return View("NotFound");
             }
 
-            
+            var userClaims = await userManager.GetClaimsAsync(user);
+            var userRoles = await userManager.GetRolesAsync(user);
 
-            return View();
+            var model = new EditUserViewModel
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                FullName = user.FullName,
+                Gender = user.Gender,
+                Address = user.Address,
+
+                Claims = userClaims.Select(c => c.Value).ToList(),
+                Roles = userRoles.ToList()
+            };
+
+            return View(model);
         }
 
         [HttpGet]
