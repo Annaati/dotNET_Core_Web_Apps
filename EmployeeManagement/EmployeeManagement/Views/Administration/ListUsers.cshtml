@@ -14,10 +14,12 @@
         foreach (var user in Model)
         {
             <div class="card mb-4">
-                <div class="card-header mb-4">UserId: @user.Id</div>
+                <div class="card-header mb-2">UserId: @user.Id</div>
                 <div class="card-body">
-                    UserName: @user.UserName<br/>
-                    User Address: @user.Address
+                    FullName:  @user.FullName<br />
+                    UserName:  @user.UserName<br />
+                    Email:  @user.Email<br />
+                    Address:  @user.Address
                 </div>
                 <div class="card-footer">
                     <div class="d-flex justify-content-center">
