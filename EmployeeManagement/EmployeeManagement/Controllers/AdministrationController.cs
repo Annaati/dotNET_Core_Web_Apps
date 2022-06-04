@@ -32,6 +32,22 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} could not be found";
+                return View("NotFound");
+            }
+
+            
+
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult CreateRole()
         {
             return View();
