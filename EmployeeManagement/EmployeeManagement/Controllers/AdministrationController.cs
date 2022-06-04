@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagement.Controllers
 {
-    [Authorize (Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -36,7 +36,7 @@ namespace EmployeeManagement.Controllers
         {
             var user = await userManager.FindByIdAsync(id);
 
-            if(user == null)
+            if (user == null)
             {
                 ViewBag.ErrorMessage = $"User with Id = {id} could not be found";
                 return View("NotFound");
@@ -61,6 +61,38 @@ namespace EmployeeManagement.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel model)
+        {
+            var user = await userManager.FindByIdAsync(model.Id);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {model.Id} could not be found";
+                return View("NotFound");
+            }
+            else
+            {
+                user.FullName = model.FullName;
+                user.UserName = model.UserName;
+                user.Email = user.Email;
+                user.Address = user.Address;
+
+                var result = await userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+
+            return View(model);
+        }
+
         [HttpGet]
         public IActionResult CreateRole()
         {
@@ -70,7 +102,7 @@ namespace EmployeeManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 IdentityRole identityRole = new IdentityRole
                 {
@@ -78,11 +110,11 @@ namespace EmployeeManagement.Controllers
                 };
                 IdentityResult result = await roleManager.CreateAsync(identityRole);
 
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     return RedirectToAction("ListRoles", "Administration");
                 }
-                foreach(IdentityError error in result.Errors)
+                foreach (IdentityError error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
@@ -114,9 +146,9 @@ namespace EmployeeManagement.Controllers
                 RoleName = role.Name
             };
 
-            foreach(var user in userManager.Users)
+            foreach (var user in userManager.Users)
             {
-                if(await userManager.IsInRoleAsync(user, role.Name))
+                if (await userManager.IsInRoleAsync(user, role.Name))
                 {
                     model.Users.Add(user.UserName);
                 }
@@ -158,7 +190,7 @@ namespace EmployeeManagement.Controllers
 
             var role = await roleManager.FindByIdAsync(roleId);
 
-            if(role == null)
+            if (role == null)
             {
                 ViewBag.ErrorMessage = $"Role with Id = {roleId} could not be found";
                 return View("NotFound");
@@ -166,14 +198,14 @@ namespace EmployeeManagement.Controllers
 
             var model = new List<UserRoleViewModel>();
 
-            foreach(var user in userManager.Users)
+            foreach (var user in userManager.Users)
             {
                 var userRoleViewModel = new UserRoleViewModel
                 {
                     UserId = user.Id,
                     UserName = user.UserName
                 };
-                if(await userManager.IsInRoleAsync(user, role.Name))
+                if (await userManager.IsInRoleAsync(user, role.Name))
                 {
                     userRoleViewModel.IsSelected = true;
                 }
@@ -203,7 +235,7 @@ namespace EmployeeManagement.Controllers
 
                 IdentityResult result = null;
 
-                if(model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))
+                if (model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))
                 {
                     result = await userManager.AddToRoleAsync(user, role.Name);
                 }
@@ -216,7 +248,7 @@ namespace EmployeeManagement.Controllers
                     continue;
                 }
 
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     if (i < (model.Count - 1))
                         continue;
@@ -227,6 +259,6 @@ namespace EmployeeManagement.Controllers
             return RedirectToAction("EditRole", new { Id = role.Id });
         }
 
-       
+
     }
 }
