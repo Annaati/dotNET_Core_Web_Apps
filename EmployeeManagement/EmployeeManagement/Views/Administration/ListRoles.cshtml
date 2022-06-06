@@ -26,8 +26,18 @@
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-center">
-                    <a class="btn btn-primary" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id" style="width:auto">Edit Role</a>&nbsp &nbsp &nbsp
-                    <a href="#" class="btn btn-primary" style="width:auto">Delete Role</a>
+                    <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+                        <a class="btn btn-primary" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id" style="width:auto">Edit Role</a>&nbsp &nbsp &nbsp
+
+                        <span id="confirmDeleteSpan_@role.Id" style="display:none;">
+                            <span>Are you sure you want to Delete?</span>
+                            <button type="submit" class="btn btn-danger" style="width:auto">Yes</button>
+                            <a href="#" class="btn btn-primary" style="width:auto" onclick="confirmDelete('@role.Id', false)">No</a>
+                        </span>
+                        <span id="deleteSpan_@role.Id">
+                            <a href="#" class="btn btn-danger" style="width:auto" onclick="confirmDelete('@role.Id', true)">Delete Role</a>
+                        </span>
+                    </form>
                 </div>
             </div>
         }
@@ -51,4 +61,8 @@
         </div>
     }
 </div>
+
+@section Scripts {
+    <script src="~/assets/js/CustomScripts.js"></script>
+}
 
