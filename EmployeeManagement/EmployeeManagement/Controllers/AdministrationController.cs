@@ -31,6 +31,7 @@ namespace EmployeeManagement.Controllers
             return View(users);
         }
 
+
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
@@ -93,6 +94,34 @@ namespace EmployeeManagement.Controllers
             return View(model);
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} could not be found";
+                return View("NotFound");
+            }
+            else
+            {
+                var result = await userManager.DeleteAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return View("ListUsers");
+        }
+
+
         [HttpGet]
         public IActionResult CreateRole()
         {
@@ -129,6 +158,7 @@ namespace EmployeeManagement.Controllers
             var roles = roleManager.Roles;
             return View(roles);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> EditRole(String id)
@@ -182,6 +212,9 @@ namespace EmployeeManagement.Controllers
                 return View(model);
             }
         }
+
+        
+
 
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(String roleId)
@@ -258,6 +291,7 @@ namespace EmployeeManagement.Controllers
             }
             return RedirectToAction("EditRole", new { Id = role.Id });
         }
+
 
 
     }
