@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20220531190801_Extend_IdentityUser.cs" />
-    <Compile Remove="Migrations\20220531190929_Extend_IdentityUser.cs" />
+    <Compile Remove="Migrations\20220606005708_FK_Delete_Restrick.cs" />
   </ItemGroup>
 
   <ItemGroup>
