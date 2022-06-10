@@ -1,8 +1,15 @@
-﻿<h3>An Error occured while Processing your Request.
+﻿@if(ViewBag.ErrorTitle == null) {
+<h3>An Error occured while Processing your Request.
     The Support Team is Notified and we are working on it.</h3>
 
-<h5>For farther Details Please Contact Us Support@Annaati.com</h5>
+<h5>For farther Details Please Contact Us <span style="color: darkblue;">Support@EMS.com</span></h5>
 <hr />
+}
+else
+{
+<h2 class="text-danger">@ViewBag.ErrorTitle</h2>
+    <h4 class="text-danger">@ViewBag.ErrorMessage</h4>
+}
 
 @*<h3>Exception Details:</h3>
 <div class="alert alert-danger">
