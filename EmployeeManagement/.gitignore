@@ -7,6 +7,8 @@ EmployeeManagement/wwwroot/lib
 *.user
 *.userosscache
 *.sln.docstates
+EmployeeManagement/wwwroot/plugins/
+EmployeeManagement/Migrations/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
